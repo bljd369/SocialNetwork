@@ -2,12 +2,13 @@
 from django.shortcuts import render, redirect
 from account.forms import SignUpForm, LoginForm
 from django.contrib import messages
-from django.views.generic.edit import FormView 
+from django.views.generic.edit import FormView
+from django.views.generic import TemplateView
 from django.contrib.auth import login, logout
-
+from django.contrib.auth.models import User
 
 class SignUpView(FormView):
-    template_name = "sign_up.html"
+    template_name = "account/sign_up.html"
     form_class = SignUpForm
     success_url = '/users/login'
 
@@ -35,7 +36,7 @@ def home(request):
 
 
 def userlogin(request):
-  template_name = "login.html"
+  template_name = "account/login.html"
   form = LoginForm()
   if request.method == 'POST':
     form = LoginForm(request.POST)
@@ -44,8 +45,17 @@ def userlogin(request):
       login(request, user)
       return redirect("/")
   return render(request, template_name, {'form': form})
- 
 
+
+
+ 
+class UserProfile(TemplateView):
+  template_name = "account/profile.html"
+
+  def get_context_data(self, *args, **kwargs):
+    context = super(UserProfile, self).get_context_data(*args, **kwargs)
+    context['user'] = User.objects.get(username=kwargs['username'])
+    return context
 
 
 

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+    .cover-div {
+        height: 200px; 
+        background: url('http://placehold.it/1000x200');
+    }
+
+    .cover-div .display-name {
+      padding: 10px;
+    }
+
+    .cover-buttons {
+      margin-top: 85px;
+      margin-right: 20px;
+    }
+
+</style>
+
+<div class='cover-div'>
+    <h2 class='display-name'>{{ user.first_name }} {{ user.last_name }}</h2>
+    <div class='cover-buttons pull-right'>
+        <a href='#' class='btn btn-primary'>Add Friend</a>
+        <a href='#' class='btn btn-danger'>Remove Friend</a>
+        <a href='#' class='btn btn-primary'>Message</a>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("input").addClass("form-control");    
+  });
+</script>
+{% endblock %}

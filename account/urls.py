@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from account.views import SignUpView, userlogin
+from account.views import SignUpView, userlogin, UserProfile
 
 
 urlpatterns = patterns('account.views',
@@ -13,6 +13,8 @@ urlpatterns = patterns('account.views',
     url(r'^signup$', SignUpView.as_view(), name='Sign_up'),
    
     url(r'^login$', userlogin),
+
+    url(r'^profile/(?P<username>\w+)/$', UserProfile.as_view(), name='user_profile'),
 
 
 

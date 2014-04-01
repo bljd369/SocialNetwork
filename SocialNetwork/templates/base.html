@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    
+    </head>
+
+    <body>
+        <div class='container'>
+            <div>
+                <ul class="nav nav-pills pull-right">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#">Profile</a></li>
+                  <li><a href="#">Messages</a></li>
+                </ul>
+            </div>
+
+            <div class='clearfix'></div>
+            {% block content %} {% endblock %}
+
+
+        </div>
+
+        <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+        {% block extra_js %}
+
+        {% endblock %}
+    
+    </body>
+</html>
