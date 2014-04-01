@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from account.views import SignUpView
+from account.views import SignUpView, userlogin
 
 
 urlpatterns = patterns('account.views',
@@ -10,7 +10,10 @@ urlpatterns = patterns('account.views',
     #url(r'^$', 'polls'),  
     #function based url  url(r'^signup$', 'sign_up'), 
     #class based urls
-    url(r'^signup$', SignUpView.as_view(), name='Sign_up')
+    url(r'^signup$', SignUpView.as_view(), name='Sign_up'),
+   
+    url(r'^login$', userlogin),
+
 
 
    

@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 
 from account.models import UserProfile
 
@@ -64,3 +65,27 @@ class SignUpForm(ModelForm):
         instance.save()
         UserProfile.objects.create(user=instance, gender=self.cleaned_data['gender'], dob=self.cleaned_data['dob'])
         return instance
+
+
+
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length=100)
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    
+
+    def clean(self):
+        
+        if self._errors:
+            raise forms.ValidationError("Invalid Form")
+        cleaned_data = super(LoginForm, self).clean()
+        username = cleaned_data['username']
+        password = cleaned_data['password']
+        user = authenticate(username=username, password=password)
+
+        if user is None:
+            raise forms.ValidationError("Authentication failed")
+        if not user.is_active:
+            raise forms.ValidationError("Inactive User")
+        cleaned_data['user'] = user
+        return cleaned_data 
